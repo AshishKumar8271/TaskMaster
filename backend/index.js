@@ -7,7 +7,7 @@ const todoRoutes = require("./routes/todos.route.js");
 
 const app = express();
 dotenv.config();
-app.use(cors());
+app.use(cors({ origin: "https://task-master-sable.vercel.app", credentials: true }));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
