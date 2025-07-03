@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL + "/todos/";
+const API_URL = import.meta.env.VITE_API_URL + "/api/todos/";
 
 export const useTodo = () => {
     const [isLoading, setIsLoading] = useState(false);
