@@ -32,7 +32,7 @@ const Home = () => {
     }
   };
   return (
-    <div>
+    <div className='min-h-screen'>
       <Header handleSignInClick={handleSignInClick} handleSignUpClick={handleSignUpClick} />
       <Hero onGetStarted={handleGetStarted} />
       <Features />

@@ -1,15 +1,16 @@
-import { Check, LogOut, User } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { Button } from './ui/button'
 import { ModeToggle } from './mode-toggle'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../components/ui/tooltip'
 import { useAuthContext } from '@/context/AuthContext'
+import CustomTooltip from './custom-tooltip'
+import UserMenu from './user-menu'
 
 interface HeaderProps {
     handleSignInClick: () => void,
     handleSignUpClick: () => void,
 }
 
-const Header = ({handleSignInClick, handleSignUpClick}: HeaderProps) => {
+const Header = ({ handleSignInClick, handleSignUpClick }: HeaderProps) => {
     const { isAuthenticated, user, logout } = useAuthContext();
 
     return (
@@ -24,38 +25,18 @@ const Header = ({handleSignInClick, handleSignUpClick}: HeaderProps) => {
                             <h1 className="text-xl font-bold ">TaskMaster</h1>
                         </div>
 
-                        <div className="flex items-center space-x-4">
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <span>
-                                        <ModeToggle />
-                                    </span>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    Toggle theme
-                                </TooltipContent>
-                            </Tooltip>
+                        <div className="flex items-center space-x-2">
+                            <CustomTooltip content='Toggle theme'>
+                                <ModeToggle />
+                            </CustomTooltip>
                             {isAuthenticated && user ? (
-                                <div className="flex items-center space-x-3">
-                                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                                        <User className="w-4 h-4 text-gray-600" />
-                                    </div>
-                                    <span className="text-sm font-medium ">{user.username}</span>
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        onClick={logout}
-                                    >
-                                        <LogOut className="w-4 h-4 mr-1" />
-                                        Logout
-                                    </Button>
-                                </div>
+                                <UserMenu username={user.username} onLogout={logout} />
                             ) : (
-                                <div className="flex items-center space-x-3">
+                                <div className="flex items-center space-x-2">
                                     <Button variant="ghost" onClick={handleSignInClick}>
                                         Sign In
                                     </Button>
-                                    <Button onClick={handleSignUpClick}>
+                                    <Button onClick={handleSignUpClick} className='hidden sm:block'>
                                         Sign Up
                                     </Button>
                                 </div>
